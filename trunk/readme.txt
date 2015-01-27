@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: changetip
 Donate link: https://www.changetip.com/tipme/evan
-Tags: tip, tipping, bitcoin, changetip, bits, satoshi, posts, post, tip.me
+Tags: tip, tipping, tip button, like button, bitcoin, bitcoin button, changetip, bits, satoshi, posts, post, tip.me
 Requires at least: 3.0
 Tested up to: 4.1
 Stable tag: trunk
@@ -13,13 +13,19 @@ When a Like isn't enough, mention @changetip and we will send a tip with Bitcoin
 
 == Description ==
 
-Install this plugin and connect your wordpress blog with changetip.com and now your readers can send you tips with ease!
+Now your readers can directly show their appreciation and how they value your content by sending tips. Install this plugin and connect your wordpress blog with changetip.com to give your readers the option to micro pay you.
 
-Get tipped for your content when a user clicks the social tip.me share button or leaves you a comment, such as "Great post, here $1 @changetip", "High Five @changetip" or "Love this!!! 300 bits @changetip".
+1. Get tipped for your content when a reader clicks the social tip.me button.
 
-The plugin will present the reader with a pop over changetip.com page of the blog author, where the user can leave a tip for the user.
+Readers can leave any amount and send you comments via the tip button.
 
-Changetip is live on twitter, reddit, google+, youtube and other social sites and now on your Wordpress blog :)
+2. Readers familiar with ChangeTip may also choose to leave you a tip in the comment section of your blog. Such as "Great post, here $1 @changetip", "High Five @changetip" or "Love this!!! 300 bits @changetip".
+
+The plugin will present the reader with a popover changetip.com page of the blog author, where the user can confirm the tip intended for you.
+
+3. Publishers with multiple authors can connect and receive tip buttons for all their staff!
+
+www.changetip.com - the leading micropayment infrastructure for the web.
 
 == Installation ==
 
@@ -38,11 +44,6 @@ Yes, you'll need to create an account (login via Facebook, Twitter, Google, Redd
 
 2. Do commenters or readers who want to leave me a tip need to have an account at changetip.com?
 Not at first.  While leaving you a tip, the plugin will open a popover window to allow the tipper to confirm the amount they are leaving. This flow will ask them to login/create an account at www.changetip.com if they don't already have one.
-
-== Screenshots ==
-
-1. https://www.changetip.com/public/assets/changetip_wordpress1.png
-2. https://www.changetip.com/public/assets/changetip_wordpress2.png
 
 == Changelog ==
 
