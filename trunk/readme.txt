@@ -29,7 +29,7 @@ Changetip is live on twitter, reddit, google+, youtube and other social sites an
 
 3. Now under Settings->ChangeTip you can connect the plugin to any number of Changetip.com accounts for single or multi-author support. Simply log into a ChangeTip account with the same browser (preferrably in another browser tab or window), then return to the WordPress ChangeTip Settings section and click "Connect ChangeTip Account", next follow the popover instructions.
 
-4. You can step 3 over again for any number of different ChangeTip accounts. After you've connected all your accounts, the plugin will attempt to automatically associate them with other authors of your blog by username. To manage this yourself, simply Click "Users" in your WordPress admin dashboard. Next, select a user, scroll down to the section titled "ChangeTip Account". From there you can select the ChangeTip account you wish to associate with this particular user.
+4. Repeat step 3 for any number of different ChangeTip accounts. After you've connected all your accounts, the plugin will attempt to automatically associate them with other authors of your blog by username. To manage this yourself, simply Click "Users" in your WordPress admin dashboard. Next, select a user, scroll down to the section titled "ChangeTip Account". From there you can select the ChangeTip account you wish to associate with this particular user.
 
 == Frequently Asked Questions ==
 
@@ -46,10 +46,10 @@ Not at first.  While leaving you a tip, the plugin will open a popover window to
 
 == Changelog ==
 
-= 0.1 =
+= 0.0.1 =
 Alpha version.
 
 == Upgrade Notice ==
 
-= 0.1 =
+= 0.0.1 =
 Alpha version.
