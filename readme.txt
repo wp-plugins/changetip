@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: changetip
+Contributors: changetip, Evan Nagle, Jim Lyndon
 Donate link: https://www.changetip.com/tipme/evan
 Tags: tip, tipping, tip button, like button, bitcoin, bitcoin button, changetip, bits, satoshi, posts, post, tip.me
 Requires at least: 3.0
@@ -13,19 +13,19 @@ When a Like isn't enough, mention @changetip and we will send a tip with Bitcoin
 
 == Description ==
 
-Now your readers can directly show their appreciation and how they value your content by sending tips. Install this plugin and connect your wordpress blog with changetip.com to give your readers the option to micro pay you.
+www.changetip.com - the leading micropayment infrastructure for the web.
+
+Now your readers can directly show their appreciation and how they value your content by sending tips.
+
+Install this plugin and connect your wordpress blog with changetip.com to give your readers the option to micro pay you.
 
 1. Get tipped for your content when a reader clicks the social tip.me button.
+  - Readers can leave any amount and send you comments via the tip button.
 
-Readers can leave any amount and send you comments via the tip button.
-
-2. Readers familiar with ChangeTip may also choose to leave you a tip in the comment section of your blog. Such as "Great post, here $1 @changetip", "High Five @changetip" or "Love this!!! 300 bits @changetip".
-
-The plugin will present the reader with a popover changetip.com page of the blog author, where the user can confirm the tip intended for you.
+2. Readers familiar with ChangeTip may also choose to leave you a tip in the comment section of your blog.
+  - "Great post, here $1 @changetip", "High Five @changetip" or "Love this!!! 300 bits @changetip".
 
 3. Publishers with multiple authors can connect and receive tip buttons for all their staff!
-
-www.changetip.com - the leading micropayment infrastructure for the web.
 
 == Installation ==
 
