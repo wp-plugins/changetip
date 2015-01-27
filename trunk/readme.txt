@@ -46,10 +46,16 @@ Not at first.  While leaving you a tip, the plugin will open a popover window to
 
 == Changelog ==
 
+= 0.0.2 =
+Multi Author support
+
 = 0.0.1 =
 Alpha version.
 
 == Upgrade Notice ==
+
+= 0.0.2 =
+Multi Author support
 
 = 0.0.1 =
 Alpha version.
