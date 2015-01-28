@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: changetip, Evan Nagle, Jim Lyndon
+Contributors: changetip, evannagle, Jim Lyndon
 Donate link: https://www.changetip.com/tipme/evan
 Tags: tip, tipping, tip button, like button, bitcoin, bitcoin button, changetip, bits, satoshi, posts, post, tip.me
 Requires at least: 3.0
