@@ -5,7 +5,7 @@
  * Plugin URI: http://wordpress.org/plugins/changetip/
  * Description: <a href="https://www.changetip.com/">ChangeTip</a> is a way to send and receive tips online with Bitcoin. We call ourselves a Love Button for the Internet. We’ve been told we’re revolutionizing appreciation and giving. Anytime you want to reward someone, all you have to do is mention @changetip and an amount and we’ll take care of the transaction. It’s that simple.
  * Author: ChangeTip
- * Version: 0.0.2
+ * Version: 0.0.3
  * Author URI: https://www.changetip.com/
  * Text Domain: changetip
  * Contributors: Evan Nagle and Jim Lyndon
@@ -89,7 +89,7 @@ class changetip extends pezplug {
         $user_map = NULL;
         $users = $this->get_changetip_users();
 
-        if( $post && $post->post_author ) {
+        if( is_array( $users ) && $post && $post->post_author ) {
             $author_id = $post->post_author;
             $user_name_mapped = get_user_meta( $author_id, 'changetip_user_map', TRUE );
             foreach( $users as $user ) {
