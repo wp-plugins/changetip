@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: changetip, evannagle, Jim Lyndon
+Contributors: changetip, evannagle, jimlyndon
 Donate link: https://www.changetip.com/tipme/evan
 Tags: tip, tipping, tip button, like button, bitcoin, bitcoin button, changetip, bits, satoshi, posts, post, tip.me
 Requires at least: 3.0
@@ -48,6 +48,8 @@ Yes, you'll need to create an account (login via Facebook, Twitter, Google, Redd
 Not at first.  While leaving you a tip, the plugin will open a popover window to allow the tipper to confirm the amount they are leaving. This flow will ask them to login/create an account at www.changetip.com if they don't already have one.
 
 == Changelog ==
+= 0.0.3 =
+Fix bug with mapping users
 
 = 0.0.2 =
 Multi Author support
@@ -56,6 +58,8 @@ Multi Author support
 Alpha version.
 
 == Upgrade Notice ==
+= 0.0.3 =
+Fix bug with mapping users
 
 = 0.0.2 =
 Multi Author support
