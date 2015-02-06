@@ -158,6 +158,19 @@ class pezplug {
         );  
      }
 
+     public function render_field_select( $id, $args = array(), $suffix = NULL ) {
+        $options = $this->get_options();
+        $cur_key = isset( $options[$id] ) ? $options[$id] : NULL;
+
+        printf( '<select id="%1$s" name="%2$s[%1$s]">',
+            $id, $this->slug );
+        foreach( $args as $key => $value ) {
+            $selected = $key == $cur_key ? ' selected' : NULL;
+            echo "<option value='$key'$selected>$value</option>";
+        }
+        echo '</select>';
+     }
+
      public function pezplug_admin_init() {
         if( $this->slug ) {
             register_setting( $this->slug, $this->slug );

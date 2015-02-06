@@ -173,6 +173,14 @@ class changetip extends pezplug {
             $this->slug,
             'changetip_api'
         );
+
+        add_settings_field(
+            'changetip_button_position',
+            'Button Position',
+            $this->ref( '_field_changetip_button_position' ),
+            $this->slug,
+            'changetip_api'
+        );
     }
 
     public function admin_menu() {
@@ -217,6 +225,14 @@ class changetip extends pezplug {
         $this->render_field_checkbox( 'changetip_autoreply', "<small>ChangeTip will autoreply to all tips (though you'll have to approve the autoreply). This encourages others to tip as well.</small>" );
     }
 
+    function _field_changetip_button_position() {
+        $this->render_field_select( 'changetip_button_position', array(
+            'top-and-bottom' => 'Top and Bottom',
+            'top' => 'Top',
+            'bottom' => 'Bottom'
+        ) );
+    }
+
     public function the_content( $content ) {
         global $post;
 
@@ -226,8 +242,15 @@ class changetip extends pezplug {
                 $uuid = $username->uuid;
                 $uid_factory = new CTUUID();
                 $bid = $uid_factory->v5($uuid, $post->ID);
-                $content.= "<div class='changetip_tipme_button' data-uid='$uuid' data-bid='$bid'></div>";
+                $button = "<div class='changetip_tipme_button' data-uid='$uuid' data-bid='$bid'></div>";
 
+                $position = $this->get_option( 'changetip_button_position' );
+                if( !$position || $position == 'top' || $position == 'top-and-bottom' ) {
+                    $content = $button . $content;
+                }
+                if( !$position || $position == 'bottom' || $position == 'top-and-bottom' ) {
+                    $content .= $button;
+                }
                 $content = apply_filters( 'changetip_the_content', $content );
             }
         }
