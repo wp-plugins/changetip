@@ -63,7 +63,14 @@ class changetip extends pezplug {
                 $usernames = array( $usernames_json );
             }
         }
-        return $usernames;
+
+        $sanitized_usernames = array();
+        foreach($usernames as $username) {
+            if(isset($username->name) && isset($username->uuid)) {
+                $sanitized_usernames[] = $username;
+            }
+        }
+        return $sanitized_usernames;
     }
 
     public function is_registered() {
