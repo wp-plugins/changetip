@@ -89,6 +89,10 @@ class changetip extends pezplug {
         $user_map = NULL;
         $users = $this->get_changetip_users();
 
+        print_r($users);
+
+        print_r($post->post_author);
+
         if( is_array( $users ) && $post && $post->post_author ) {
             $author_id = $post->post_author;
             $user_name_mapped = get_user_meta( $author_id, 'changetip_user_map', TRUE );
