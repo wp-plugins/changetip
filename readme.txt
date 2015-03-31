@@ -4,7 +4,7 @@ Donate link: https://www.changetip.com/tipme/evan
 Tags: tip, tipping, tip button, like button, bitcoin, bitcoin button, changetip, bits, satoshi, posts, post, tip.me
 Requires at least: 3.0
 Tested up to: 4.1
-Stable tag: 0.0.3
+Stable tag: 0.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,11 @@ Yes, you'll need to create an account (login via Facebook, Twitter, Google, Redd
 Not at first.  While leaving you a tip, the plugin will open a popover window to allow the tipper to confirm the amount they are leaving. This flow will ask them to login/create an account at www.changetip.com if they don't already have one.
 
 == Changelog ==
+
+= 0.0.4 =
+Fix additional user mapping bug
+Allow button on both top and bottom of post
+
 = 0.0.3 =
 Fix bug with mapping users
 
