@@ -62,7 +62,7 @@ class changetip extends pezplug {
                 //gracefully handle old value, not stored as json
                 $usernames = array( $usernames_json );
             }
-            if (!isarray( $usernames )) {
+            if (!is_array( $usernames )) {
                 $usernames = array();
             }
         }
