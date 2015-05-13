@@ -8,8 +8,7 @@ Stable tag: 0.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A Love Button for the Internet
-When a Like isn't enough, mention @changetip and we will send a tip with Bitcoin to the blog author.
+Get appreciated for great content and monetize in new ways. Include a tip.me button on each article to allow readers to tip you.
 
 == Description ==
 
