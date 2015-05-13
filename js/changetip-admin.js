@@ -32,6 +32,12 @@
             return false;
         });
 
+        $('a#changetip-connect').click(function () {
+            changetip.options.connect = true;
+            changetip.popup('register', { 'ct_register' : true, 'version' : "1.1" });
+            return false;
+        });
+
         $('a.changetip-delete-account').click(function() {
             $(this).closest('.changetip-username-field').remove();
             updateRegisteredUsernames();

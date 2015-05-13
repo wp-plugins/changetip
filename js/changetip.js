@@ -266,7 +266,8 @@
             changetip_register: username,
             changetip_uuid: uuid,
             changetip_currency: currency,
-            changetip_tip_suggestions: tipSuggestionsStr
+            changetip_tip_suggestions: tipSuggestionsStr,
+            changetip_connect: changetip.options.connect
         });
     };
 

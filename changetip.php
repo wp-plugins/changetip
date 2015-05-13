@@ -5,7 +5,7 @@
  * Plugin URI: http://wordpress.org/plugins/changetip/
  * Description: <a href="https://www.changetip.com/">ChangeTip</a> is a way to send and receive tips online with Bitcoin. We call ourselves a Love Button for the Internet. We’ve been told we’re revolutionizing appreciation and giving. Anytime you want to reward someone, all you have to do is mention @changetip and an amount and we’ll take care of the transaction. It’s that simple.
  * Author: ChangeTip
- * Version: 0.0.4
+ * Version: 0.0.3
  * Author URI: https://www.changetip.com/
  * Text Domain: changetip
  * Contributors: Evan Nagle and Jim Lyndon
@@ -62,18 +62,8 @@ class changetip extends pezplug {
                 //gracefully handle old value, not stored as json
                 $usernames = array( $usernames_json );
             }
-            if (!is_array( $usernames )) {
-                $usernames = array();
-            }
         }
-
-        $sanitized_usernames = array();
-        foreach($usernames as $username) {
-            if(isset($username->name) && isset($username->uuid)) {
-                $sanitized_usernames[] = $username;
-            }
-        }
-        return $sanitized_usernames;
+        return $usernames;
     }
 
     public function is_registered() {
@@ -140,6 +130,7 @@ class changetip extends pezplug {
             $new_currency = isset( $_GET['changetip_currency'] ) ? $_GET['changetip_currency'] : 'USD';
             $default_tips = isset( $_GET['changetip_tip_suggestions'] ) ? $_GET['changetip_tip_suggestions'] : '.25 USD';
             $default_tips = explode( '||', $default_tips );
+            $connect_user = isset( $_GET['changetip_connect'] );
 
             if( !count( $default_tips ) || !$default_tips[0] ) {
                 $default_tips = array( '.25 USD' );
@@ -150,6 +141,10 @@ class changetip extends pezplug {
                 'changetip_autoreply' => TRUE,
                 'changetip_version' => 1.1
             ));
+
+            if($connect_user) {
+                update_user_meta( get_current_user_id(), 'changetip_user_map', $new_username );
+            }
 
             wp_redirect( admin_url( 'options-general.php?page=changetip&changetip_register_result=1') );
             die();
@@ -194,12 +189,33 @@ class changetip extends pezplug {
     }
 
     public function admin_menu() {
+        add_menu_page(
+            'Changetip',
+            'Changetip',
+            'edit_posts',
+            $this->slug,
+            NULL,
+            'dashicons-megaphone',
+            100
+        );
+
+	    //add_menu_page( 'custom menu title', 'custom menu', 'manage_options', 'custompage',  $this->ref( '_admin_topmenu_render' ), plugins_url( 'myplugin/images/icon.png' ), 6 ); 
+
         add_submenu_page(
-            'options-general.php', //parent slug
-            'ChangeTip', //page title
-            'ChangeTip', //menu title
+            'changetip', //parent slug
+            'Connect', //page title
+            'Connect', //menu title
             'manage_options', //cap,
             $this->slug, //slug
+            $this->ref( '_connect_menu_render' )
+        );
+
+        add_submenu_page(
+            'changetip', //parent slug
+            'Settings', //page title
+            'Settings', //menu title
+            'manage_options', //cap,
+            $this->slug . '-admin', //slug
             $this->ref( '_admin_menu_render' )
         );
     }
@@ -214,6 +230,20 @@ class changetip extends pezplug {
 
     function _admin_menu_render() {
         $this->render_options_page( 'ChangeTip' );
+    }
+
+    function _connect_menu_render() {
+        echo '<div class="wrap">';
+        echo "<h2>Connect to Changetip</h2>";
+
+        $user_map = get_user_meta( get_current_user_id(), 'changetip_user_map', TRUE );
+        if( $user_map ) {
+            echo "<p>You've successfully connected to your changetip account, <strong><a href='https://www.changetip.com/tipme/$user_map'>$user_map</a></strong>.</p>";
+            echo "<p><a id='changetip-register' href='#changetip-connect' class='button'>Connect to a different ChangeTip Account</a></p>";    
+        } else {
+            echo "<p><a id='changetip-register' href='#changetip-connect' class='button'>Connect ChangeTip Account</a></p>";
+        }
+        echo '</div>';
     }
 
     function _field_changetip_username() {
