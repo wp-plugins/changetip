@@ -205,7 +205,7 @@ class changetip extends pezplug {
             'changetip', //parent slug
             'Connect', //page title
             'Connect', //menu title
-            'manage_options', //cap,
+            'edit_posts', //cap,
             $this->slug, //slug
             $this->ref( '_connect_menu_render' )
         );
