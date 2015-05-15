@@ -5,7 +5,7 @@
  * Plugin URI: http://wordpress.org/plugins/changetip/
  * Description: <a href="https://www.changetip.com/">ChangeTip</a> is a way to send and receive tips online with Bitcoin. We call ourselves a Love Button for the Internet. We’ve been told we’re revolutionizing appreciation and giving. Anytime you want to reward someone, all you have to do is mention @changetip and an amount and we’ll take care of the transaction. It’s that simple.
  * Author: ChangeTip
- * Version: 0.0.3
+ * Version: 0.0.6
  * Author URI: https://www.changetip.com/
  * Text Domain: changetip
  * Contributors: Evan Nagle and Jim Lyndon
