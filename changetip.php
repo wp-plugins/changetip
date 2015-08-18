@@ -63,7 +63,31 @@ class changetip extends pezplug {
                 $usernames = array( $usernames_json );
             }
         }
-        return $usernames;
+
+        foreach( $usernames as &$username ) {
+            if( $username ) {
+                if( !isset( $username->name ) ) $username = NULL;
+                if( !isset( $username->uuid ) ) $username = NULL;   
+            }
+        }
+
+        $usernames = array_filter( $usernames );
+        return array_values( $usernames );
+    }
+
+    public function get_changetip_users_encoded() {
+        $users = $this->get_changetip_users();    
+        foreach( $users as &$user ) {
+            if( $user && isset ( $user->name) && isset( $user->uuid ) ) {
+                $user->name = htmlspecialchars( $user->name, ENT_QUOTES );
+                $user->uuid = htmlspecialchars( $user->name, ENT_QUOTES );
+            } else {
+                $user = NULL;
+            }
+        }
+
+        $users = array_filter( $users );
+        return array_values( $users );
     }
 
     public function is_registered() {
@@ -120,6 +144,10 @@ class changetip extends pezplug {
     }
 
     public function admin_init() {
+	    if ( !current_user_can( 'manage_options' ) ) {
+		    wp_die( 'You are not allowed.' );
+	    }
+
         if( function_exists( 'changetip_check_for_updates' ) ) {
             changetip_check_for_updates( $this ); //updates.php
         }
@@ -146,7 +174,7 @@ class changetip extends pezplug {
                 update_user_meta( get_current_user_id(), 'changetip_user_map', $new_username );
             }
 
-            wp_redirect( admin_url( 'options-general.php?page=changetip&changetip_register_result=1') );
+            wp_redirect( admin_url( 'admin.php?page=changetip&changetip_register_result=1') );
             die();
         }
 
@@ -237,6 +265,8 @@ class changetip extends pezplug {
         echo "<h2>Connect to Changetip</h2>";
 
         $user_map = get_user_meta( get_current_user_id(), 'changetip_user_map', TRUE );
+        $user_map = htmlspecialchars( $user_map, ENT_QUOTES );
+
         if( $user_map ) {
             echo "<p>You've successfully connected to your changetip account, <strong><a href='https://www.changetip.com/tipme/$user_map'>$user_map</a></strong>.</p>";
             echo "<p><a id='changetip-register' href='#changetip-connect' class='button'>Connect to a different ChangeTip Account</a></p>";    
@@ -247,11 +277,11 @@ class changetip extends pezplug {
     }
 
     function _field_changetip_username() {
-        $users = $this->get_changetip_users();
+        $users = $this->get_changetip_users_encoded();
         if( count( $users ) > 0 ) {
             foreach( $users as $user ) { ?>
                 <div class='changetip-username-field'>
-                    <input type='text' readonly value='<?php echo htmlspecialchars( $user->name ); ?>' data-uuid='<?php echo htmlspecialchars( $user->uuid ); ?>' />
+                    <input type='text' readonly value='<?php echo $user->name; ?>' data-uuid='<?php echo $user->uuid; ?>' />
                     <a href="#" class="changetip-delete-account button-secondary">Delete</a>
                     <hr/>
                 </div>
@@ -280,9 +310,10 @@ class changetip extends pezplug {
             $username = $this->get_mapped_changetip_user();
             if( $username && $username->uuid ) {
                 $uuid = $username->uuid;
+                $uuid_esc = htmlspecialchars( $uuid, ENT_QUOTES );
                 $uid_factory = new CTUUID();
-                $bid = $uid_factory->v5($uuid, $post->ID);
-                $button = "<div class='changetip_tipme_button' data-uid='$uuid' data-bid='$bid'></div>";
+                $bid = $uid_factory->v5( $uuid, $post->ID );
+                $button = "<div class='changetip_tipme_button' data-uid='$uuid_esc' data-bid='$bid'></div>";
 
                 $position = $this->get_option( 'changetip_button_position' );
                 if( !$position || $position == 'top' || $position == 'top-and-bottom' ) {
@@ -301,8 +332,8 @@ class changetip extends pezplug {
         $username = $this->get_mapped_changetip_user();
 
         if( $username ) {
-            $username_json = htmlspecialchars( json_encode( $username->name ) );
-            $uuid_json = htmlspecialchars( json_encode( $username->uuid ) );
+            $username_json = htmlspecialchars( json_encode( $username->name ), ENT_QUOTES );
+            $uuid_json = htmlspecialchars( json_encode( $username->uuid ), ENT_QUOTES );
             echo "<meta property='changetip:username' content=\"$username_json\" />\n";
             echo "<meta property='changetip:uuid' content=\"$uuid_json\" />\n";
         }
@@ -321,7 +352,7 @@ class changetip extends pezplug {
             echo "<meta property='changetip:postId' content=\"$post_id\" />\n";
         }
         $app_id = 'q5TL7owpVHBSHFXAoX8hPm';
-        $app_id_json = htmlspecialchars( json_encode( $app_id ) );
+        $app_id_json = htmlspecialchars( json_encode( $app_id ), ENT_QUOTES );
         echo "<meta property='changetip:appid' content=\"$app_id_json\" />\n";
 
         $ajaxurl = admin_url('admin-ajax.php');
