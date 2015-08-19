@@ -2,7 +2,6 @@
 'use strict';
 
 (function($, changetip) {
-
     $(function() {
         $.getScript(changetip.origin + "/public/js/widgets.js")
         .done(function() {

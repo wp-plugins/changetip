@@ -5,7 +5,7 @@
  * Plugin URI: http://wordpress.org/plugins/changetip/
  * Description: <a href="https://www.changetip.com/">ChangeTip</a> is a way to send and receive tips online with Bitcoin. We call ourselves a Love Button for the Internet. We’ve been told we’re revolutionizing appreciation and giving. Anytime you want to reward someone, all you have to do is mention @changetip and an amount and we’ll take care of the transaction. It’s that simple.
  * Author: ChangeTip
- * Version: 0.0.6
+ * Version: 0.0.7
  * Author URI: https://www.changetip.com/
  * Text Domain: changetip
  * Contributors: Evan Nagle and Jim Lyndon
@@ -80,7 +80,7 @@ class changetip extends pezplug {
         foreach( $users as &$user ) {
             if( $user && isset ( $user->name) && isset( $user->uuid ) ) {
                 $user->name = htmlspecialchars( $user->name, ENT_QUOTES );
-                $user->uuid = htmlspecialchars( $user->name, ENT_QUOTES );
+                $user->uuid = htmlspecialchars( $user->uuid, ENT_QUOTES );
             } else {
                 $user = NULL;
             }
@@ -343,7 +343,7 @@ class changetip extends pezplug {
             $comment->context_url = get_comment_link( $comment->comment_ID );
 
             if( $comment ) {
-                $comment_json = htmlspecialchars( json_encode( $comment ) );
+                $comment_json = htmlspecialchars( json_encode( $comment ), ENT_QUOTES );
                 echo "<meta property='changetip:approve' content=\"$comment_json\" />\n";
             }
         }
