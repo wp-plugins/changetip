@@ -5,7 +5,7 @@
  * Plugin URI: http://wordpress.org/plugins/changetip/
  * Description: <a href="https://www.changetip.com/">ChangeTip</a> is a way to send and receive tips online with Bitcoin. We call ourselves a Love Button for the Internet. We’ve been told we’re revolutionizing appreciation and giving. Anytime you want to reward someone, all you have to do is mention @changetip and an amount and we’ll take care of the transaction. It’s that simple.
  * Author: ChangeTip
- * Version: 0.0.7
+ * Version: 0.0.8
  * Author URI: https://www.changetip.com/
  * Text Domain: changetip
  * Contributors: Evan Nagle and Jim Lyndon
@@ -64,14 +64,18 @@ class changetip extends pezplug {
             }
         }
 
-        foreach( $usernames as &$username ) {
-            if( $username ) {
-                if( !isset( $username->name ) ) $username = NULL;
-                if( !isset( $username->uuid ) ) $username = NULL;   
+        if( empty( $usernames ) ) {
+            $usernames = array();
+        } else {
+            foreach( $usernames as &$username ) {
+                if( $username ) {
+                    if( !isset( $username->name ) ) $username = NULL;
+                    if( !isset( $username->uuid ) ) $username = NULL;   
+                }
             }
+            $usernames = array_filter( $usernames );
         }
-
-        $usernames = array_filter( $usernames );
+        
         return array_values( $usernames );
     }
 
@@ -313,13 +317,14 @@ class changetip extends pezplug {
                 $uuid_esc = htmlspecialchars( $uuid, ENT_QUOTES );
                 $uid_factory = new CTUUID();
                 $bid = $uid_factory->v5( $uuid, $post->ID );
-                $button = "<div class='changetip_tipme_button' data-uid='$uuid_esc' data-bid='$bid'></div>";
 
                 $position = $this->get_option( 'changetip_button_position' );
                 if( !$position || $position == 'top' || $position == 'top-and-bottom' ) {
+                    $button = "<div class='changetip_tipme_button pos-top' data-uid='$uuid_esc' data-bid='$bid'></div>";
                     $content = $button . $content;
                 }
                 if( !$position || $position == 'bottom' || $position == 'top-and-bottom' ) {
+                    $button = "<div class='changetip_tipme_button pos-bottom' data-uid='$uuid_esc' data-bid='$bid'></div>";
                     $content .= $button;
                 }
                 $content = apply_filters( 'changetip_the_content', $content );

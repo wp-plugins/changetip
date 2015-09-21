@@ -27,6 +27,14 @@
 #changetip-social-button {
   padding: 15px 0;
 }
+.changetip_tipme_button {
+    margin: 1em 0;
+    position: relative;
+    z-index: 1;
+}
+.changetip_tipme_button.pos-top {
+    z-index: 2;
+}
 @media only screen and (max-width: 1005px) {
   #changetip-popup {
     padding-top: 10px;
