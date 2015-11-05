@@ -4,7 +4,7 @@ Donate link: https://www.changetip.com/tipme/evan
 Tags: tip, tipping, tip button, like button, bitcoin, bitcoin button, changetip, bits, satoshi, posts, post, tip.me
 Requires at least: 3.0
 Tested up to: 4.3
-Stable tag: 0.0.8
+Stable tag: 0.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,7 +34,7 @@ Get appreciated (and paid) for great content.
 
 3. Also if upgrading, remember to reconnect any ChangeTip accounts you currently have connected. This tells changetip.com that you have the latest plugin installed and that changetip.com can use the latest features (such as upgrades to the tip button) for your blog.
 
-4. Find the ChangeTip option in the left navigation bar, and select Connect. 
+4. Find the ChangeTip option in the left navigation bar, and select Connect.
 - If you only need to connect one account,  simply login to a your ChangeTip account with the same browser (preferably in another browser tab or window), then return to the WordPress ChangeTip Settings section and click "Connect ChangeTip Account", and follow the popover instructions.
 - If you’d like to allow other authors to connect their accounts, instruct them to connect using the same method described above. Note: The author will only have access to ChangeTip > Connect and will not have access to Settings unless they have admin access to WordPress.
 
@@ -49,6 +49,9 @@ Yes, you'll need to create an account (login via Facebook, Twitter, Google, Redd
 Not at first.  While leaving you a tip, the plugin will open a popover window to allow the tipper to confirm the amount they are leaving. This flow will ask them to login/create an account at www.changetip.com if they don't already have one.
 
 == Changelog ==
+
+= 0.0.9 =
+Bugfix for author and contributor roles.
 
 = 0.0.8 =
 Bugfixes and ehancements to match Changetip.com updates.

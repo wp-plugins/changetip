@@ -5,7 +5,7 @@
  * Plugin URI: http://wordpress.org/plugins/changetip/
  * Description: <a href="https://www.changetip.com/">ChangeTip</a> is a way to send and receive tips online with Bitcoin. We call ourselves a Love Button for the Internet. We’ve been told we’re revolutionizing appreciation and giving. Anytime you want to reward someone, all you have to do is mention @changetip and an amount and we’ll take care of the transaction. It’s that simple.
  * Author: ChangeTip
- * Version: 0.0.8
+ * Version: 0.0.9
  * Author URI: https://www.changetip.com/
  * Text Domain: changetip
  * Contributors: Evan Nagle and Jim Lyndon
@@ -28,6 +28,8 @@ class changetip extends pezplug {
         $this->add_action( 'admin_init' );
         $this->add_action( 'admin_menu' );
         $this->add_action( 'admin_notices' );
+        $this->add_admin_script( 'js/changetip-admin.js', array( 'js/changetip.js' ) );
+
         $this->add_style( 'css/changetip.css' );
         $this->add_script( 'js/pez.js', array( 'jquery' ) );
         $this->add_script( 'js/changetip.js', array( 'js/pez.js' ) );
@@ -36,7 +38,7 @@ class changetip extends pezplug {
         $this->add_admin_style( 'css/changetip.css' );
         $this->add_admin_script( 'js/pez.js', array( 'jquery' ) );
         $this->add_admin_script( 'js/changetip.js', array( 'js/pez.js' ) );
-        $this->add_admin_script( 'js/changetip-admin.js', array( 'js/changetip.js' ) );
+
         $this->add_filter( 'the_content' );
         $this->add_filter( 'comment_post_redirect', NULL, 99, 2 );
         $this->add_action( 'show_user_profile' );
@@ -44,6 +46,12 @@ class changetip extends pezplug {
         $this->add_action( 'personal_options_update' );
         $this->add_action( 'edit_user_profile_update', 'personal_options_update' );
         $this->add_action( 'wp_head' );
+    }
+
+    private function _has_changetip_admin_access() {
+        $user_access = current_user_can( 'edit_posts' );
+        $user_access = apply_filters( 'has_changetiop_admin_access', $user_access );
+        return $user_access;
     }
 
     public function deactivate() {
@@ -70,17 +78,17 @@ class changetip extends pezplug {
             foreach( $usernames as &$username ) {
                 if( $username ) {
                     if( !isset( $username->name ) ) $username = NULL;
-                    if( !isset( $username->uuid ) ) $username = NULL;   
+                    if( !isset( $username->uuid ) ) $username = NULL;
                 }
             }
             $usernames = array_filter( $usernames );
         }
-        
+
         return array_values( $usernames );
     }
 
     public function get_changetip_users_encoded() {
-        $users = $this->get_changetip_users();    
+        $users = $this->get_changetip_users();
         foreach( $users as &$user ) {
             if( $user && isset ( $user->name) && isset( $user->uuid ) ) {
                 $user->name = htmlspecialchars( $user->name, ENT_QUOTES );
@@ -148,9 +156,7 @@ class changetip extends pezplug {
     }
 
     public function admin_init() {
-	    if ( !current_user_can( 'manage_options' ) ) {
-		    wp_die( 'You are not allowed.' );
-	    }
+        if( !$this->_has_changetip_admin_access() ) return;
 
         if( function_exists( 'changetip_check_for_updates' ) ) {
             changetip_check_for_updates( $this ); //updates.php
@@ -231,8 +237,6 @@ class changetip extends pezplug {
             100
         );
 
-	    //add_menu_page( 'custom menu title', 'custom menu', 'manage_options', 'custompage',  $this->ref( '_admin_topmenu_render' ), plugins_url( 'myplugin/images/icon.png' ), 6 ); 
-
         add_submenu_page(
             'changetip', //parent slug
             'Connect', //page title
@@ -253,6 +257,8 @@ class changetip extends pezplug {
     }
 
     public function admin_notices() {
+        if( !$this->_has_changetip_admin_access() ) return;
+
         if( !$this->is_registered() ) { ?>
             <div class='update-nag'>
                 <p>The ChangeTip Plugin is activated! <strong>Please <a id="changetip-register" href='#changetip-register'>connect your ChangeTip account</a>.</strong>
@@ -273,7 +279,7 @@ class changetip extends pezplug {
 
         if( $user_map ) {
             echo "<p>You've successfully connected to your changetip account, <strong><a href='https://www.changetip.com/tipme/$user_map'>$user_map</a></strong>.</p>";
-            echo "<p><a id='changetip-register' href='#changetip-connect' class='button'>Connect to a different ChangeTip Account</a></p>";    
+            echo "<p><a id='changetip-register' href='#changetip-connect' class='button'>Connect to a different ChangeTip Account</a></p>";
         } else {
             echo "<p><a id='changetip-register' href='#changetip-connect' class='button'>Connect ChangeTip Account</a></p>";
         }
